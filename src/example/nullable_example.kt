@@ -1,20 +1,28 @@
+@file:Suppress("unused", "UNUSED_VARIABLE")
+
 package example
 
-import java.util.*
+import java.net.HttpURLConnection.HTTP_BAD_REQUEST
+import java.time.Instant
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatter.ISO_INSTANT
+import java.time.format.DateTimeParseException
 
 
-enum class Direction {
-    NORTH, SOUTH, EAST, WEST
-}
-
-fun String.parseDirection_1() =
-        when (this.toLowerCase(Locale.ROOT)) {
-            "north" -> Direction.NORTH
-            "south" -> Direction.SOUTH
-            "east" -> Direction.EAST
-            "west" -> Direction.WEST
-            else -> null
+fun DateTimeFormatter.parseInstant(s: String) =
+        try {
+            parse(s, Instant::from)
+        }
+        catch (e: DateTimeParseException) {
+            null
         }
 
-fun String.parseDirection_2() =
-        Direction.values().find { it.name.equals(this, ignoreCase = true) }
+fun handleGet(request: HttpRequest): HttpResponse {
+    val startTime = request["from"].firstOrNull()?.let {
+        ISO_INSTANT.parseInstant(it)
+            ?: return HttpResponse(HTTP_BAD_REQUEST).body("invalid from time")
+    } ?: Instant.now()
+
+    etcetera
+}
+

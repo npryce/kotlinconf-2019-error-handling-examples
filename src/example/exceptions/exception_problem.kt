@@ -1,9 +1,13 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "UNUSED_PARAMETER")
 
 package example.exceptions
 
-import java.lang.NumberFormatException
-import java.net.HttpURLConnection.*
+import example.HttpRequest
+import example.HttpResponse
+import example.JsonNode
+import example.etcetera
+import java.net.HttpURLConnection.HTTP_BAD_REQUEST
+import java.net.HttpURLConnection.HTTP_OK
 
 
 fun handlePost(request: HttpRequest): HttpResponse {
@@ -40,43 +44,23 @@ class BadRequest(message: String?, cause: Exception? = null):
     constructor(cause: Exception): this(cause.message, cause)
 }
 
-interface HttpRequest {
-    fun bodyToString(): String
-}
-
 fun HttpRequest.readJson(): JsonNode {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-}
-
-private fun HttpRequest.readForm(): Map<String, String> {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-}
-
-interface JsonNode {
-    operator fun get(path: String): JsonNode
-    fun asString(): String
-}
-
-interface HttpResponse
-
-fun HttpResponse.body(body: Any?): HttpResponse {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-}
-
-fun HttpResponse(status: Int): HttpResponse {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    etcetera
 }
 
 
 fun perform(resource: Any) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    etcetera
 }
 
 fun representationOf(resource: Any): Any {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    etcetera
 }
 
 fun findResource(id: Int): Any {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    etcetera
 }
 
+private fun HttpRequest.readForm(): Map<String, String> {
+    etcetera
+}

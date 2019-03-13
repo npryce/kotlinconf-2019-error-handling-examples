@@ -3,9 +3,7 @@
 package example
 
 import com.natpryce.*
-import example.exceptions.HttpRequest
-import example.exceptions.HttpResponse
-import example.exceptions.JsonNode
+
 
 fun handlePost_nested(request: HttpRequest): Result<HttpResponse,Error> =
     request.readJson()
@@ -24,7 +22,9 @@ fun handlePost_flat(request: HttpRequest): Result<HttpResponse,Error> {
     val json = request.readJson().onFailure { return it }
     val command = json.toCommand().onFailure { return it }
     val resource = loadResource(request).onFailure { return it }
+
     val outcome = performCommand(resource, command).onFailure { return it }
+
     return Success(outcome.toHttpResponseFor(request))
 }
 
