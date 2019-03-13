@@ -17,11 +17,17 @@ fun DateTimeFormatter.parseInstant(s: String) =
             null
         }
 
+
 fun handleGet(request: HttpRequest): HttpResponse {
     val startTime = request["from"].firstOrNull()?.let {
         ISO_INSTANT.parseInstant(it)
             ?: return HttpResponse(HTTP_BAD_REQUEST).body("invalid from time")
     } ?: Instant.now()
+
+    val count = request["count"].firstOrNull()?.let {
+        it.toIntOrNull()
+            ?: return HttpResponse(HTTP_BAD_REQUEST).body("invalid count")
+    } ?: 100
 
     etcetera
 }
