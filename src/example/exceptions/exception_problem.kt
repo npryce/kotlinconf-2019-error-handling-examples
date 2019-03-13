@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package example
+package example.exceptions
 
 import java.lang.NumberFormatException
 import java.net.HttpURLConnection.*
@@ -57,8 +57,10 @@ interface JsonNode {
     fun asString(): String
 }
 
-interface HttpResponse {
-    fun body(body: Any?): HttpResponse
+interface HttpResponse
+
+fun HttpResponse.body(body: Any?): HttpResponse {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 }
 
 fun HttpResponse(status: Int): HttpResponse {
