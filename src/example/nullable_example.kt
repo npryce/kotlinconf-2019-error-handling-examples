@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter.ISO_INSTANT
 import java.time.format.DateTimeParseException
 
 
-fun DateTimeFormatter.parseInstant(s: String) =
+fun DateTimeFormatter.parseInstant(s: String): Instant? =
     try {
         parse(s, Instant::from)
     } catch (e: DateTimeParseException) {
