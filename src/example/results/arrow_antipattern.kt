@@ -1,11 +1,15 @@
 @file:Suppress("unused_parameter", "unused")
 
-package example
+package example.results
 
 import com.natpryce.*
+import example.EXAMPLE
+import example.HttpRequest
+import example.HttpResponse
+import example.JsonNode
 
 
-fun handlePost_nested(request: HttpRequest): Result<HttpResponse,Error> =
+fun handlePost_nested(request: HttpRequest): Result<HttpResponse, Error> =
     request.readJson()
         .flatMap { json ->
             json.toCommand()
@@ -18,7 +22,7 @@ fun handlePost_nested(request: HttpRequest): Result<HttpResponse,Error> =
                 }
         }
 
-fun handlePost_flat(request: HttpRequest): Result<HttpResponse,Error> {
+fun handlePost_flat(request: HttpRequest): Result<HttpResponse, Error> {
     val json = request.readJson().onFailure { return it }
     val command = json.toCommand().onFailure { return it }
     val resource = loadResource(request).onFailure { return it }
@@ -39,11 +43,14 @@ interface Resource
 
 abstract class Error
 
-fun loadResource(request: HttpRequest): Result<Resource, Error> = EXAMPLE
+fun loadResource(request: HttpRequest): Result<Resource, Error> =
+    EXAMPLE
 
 sealed class ApplicationError
 
-fun performCommand(resource: Resource, command: Command): Result<Outcome, Error> = EXAMPLE
+fun performCommand(resource: Resource, command: Command): Result<Outcome, Error> =
+    EXAMPLE
 
 private fun Error.toHttpResponse(): HttpResponse = EXAMPLE
-private fun Outcome.toHttpResponseFor(request: HttpRequest): HttpResponse = EXAMPLE
+private fun Outcome.toHttpResponseFor(request: HttpRequest): HttpResponse =
+    EXAMPLE

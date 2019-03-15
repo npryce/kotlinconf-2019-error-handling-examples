@@ -1,7 +1,11 @@
 @file:Suppress("unused", "UNUSED_VARIABLE")
 
-package example
+package example.nullable
 
+import example.HttpRequest
+import example.HttpResponse
+import example.body
+import example.etcetera
 import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import java.time.Instant
 import java.time.format.DateTimeFormatter
