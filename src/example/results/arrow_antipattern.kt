@@ -41,7 +41,6 @@ fun JsonNode.toCommand(): Result<Command, Error> = EXAMPLE
 
 interface Resource
 
-abstract class Error
 
 fun loadResource(request: HttpRequest): Result<Resource, Error> =
     EXAMPLE

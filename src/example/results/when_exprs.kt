@@ -6,6 +6,7 @@ import com.natpryce.Success
 import example.etcetera
 
 class Value
+class Error
 
 fun operationThatCanFail(): Result<Value, Error> = etcetera
 fun doSomethingWith(value: Value): Unit = etcetera
