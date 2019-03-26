@@ -3,10 +3,7 @@
 package example.results
 
 import com.natpryce.*
-import example.EXAMPLE
-import example.HttpRequest
-import example.HttpResponse
-import example.JsonNode
+import example.*
 
 
 fun handlePost_nested(request: HttpRequest): Result<HttpResponse, Error> =
@@ -36,20 +33,19 @@ fun handlePost_flat(request: HttpRequest): Result<HttpResponse, Error> {
 abstract class Command
 abstract class Outcome
 
-fun HttpRequest.readJson(): Result<JsonNode, Error> = EXAMPLE
-fun JsonNode.toCommand(): Result<Command, Error> = EXAMPLE
+fun HttpRequest.readJson(): Result<JsonNode, Error> = etcetera
+fun JsonNode.toCommand(): Result<Command, Error> = etcetera
 
 interface Resource
 
 
-fun loadResource(request: HttpRequest): Result<Resource, Error> =
-    EXAMPLE
+fun loadResource(request: HttpRequest): Result<Resource, Error> = etcetera
 
 sealed class ApplicationError
 
-fun performCommand(resource: Resource, command: Command): Result<Outcome, Error> =
-    EXAMPLE
+fun performCommand(resource: Resource, command: Command): Result<Outcome, Error> = etcetera
 
 private fun Error.toHttpResponse(): HttpResponse = EXAMPLE
-private fun Outcome.toHttpResponseFor(request: HttpRequest): HttpResponse =
-    EXAMPLE
+private fun Outcome.toHttpResponseFor(request: HttpRequest): HttpResponse = etcetera
+
+fun Error.toHttpResponseFor(request: HttpRequest): HttpResponse = etcetera
