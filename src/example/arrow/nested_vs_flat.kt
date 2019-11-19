@@ -3,8 +3,7 @@
 package example.arrow
 
 import arrow.core.Either
-import arrow.core.Right
-import arrow.core.extensions.either.monad.binding
+import arrow.core.extensions.fx
 import arrow.core.flatMap
 import example.*
 
@@ -21,7 +20,7 @@ fun handlePost_nested(request: HttpRequest): Either<Error, HttpResponse> =
                 }
         }
 
-fun handlePost_flat(request: HttpRequest): Either<Error, HttpResponse> = binding {
+fun handlePost_flat(request: HttpRequest): Either<Error, HttpResponse> = Either.fx {
     val (json) = request.readJson()
     val (command) = json.toCommand()
     val (resource) = loadResource(request)
