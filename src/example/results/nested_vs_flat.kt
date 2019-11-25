@@ -6,6 +6,18 @@ import com.natpryce.*
 import example.*
 
 
+fun handlePost_simple(request: HttpRequest): HttpResponse =
+    request.readJson()
+        .flatMap { it.toCommand() }
+        .flatMap { performCommand(it) }
+        .map { commandOutcome -> commandOutcome.toHttpResponseFor(request) }
+        .recover { error -> error.toHttpResponseFor(request) }
+
+
+fun performCommand(resource: Command): Result<Outcome, Error> =
+    etcetera
+
+
 fun handlePost_nested(request: HttpRequest): Result<HttpResponse, Error> =
     request.readJson()
         .flatMap { json ->
