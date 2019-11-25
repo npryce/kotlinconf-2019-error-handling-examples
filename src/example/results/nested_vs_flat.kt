@@ -8,10 +8,11 @@ import example.*
 
 fun handlePost_simple(request: HttpRequest): HttpResponse =
     request.readJson()
-        .flatMap { it.toCommand() }
-        .flatMap { performCommand(it) }
+        .flatMap { json -> json.toCommand() }
+        .flatMap { command -> performCommand(command) }
         .map { commandOutcome -> commandOutcome.toHttpResponseFor(request) }
-        .recover { error -> error.toHttpResponseFor(request) }
+        .mapFailure { error -> error.toHttpResponseFor(request) }
+        .get()
 
 
 fun performCommand(resource: Command): Result<Outcome, Error> =
